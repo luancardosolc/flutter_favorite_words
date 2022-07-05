@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final wordPair = WordPair.random();
+    var wordPair = WordPair.random();
     return MaterialApp(
       title: 'Favorite Words',
       theme: ThemeData(
@@ -24,8 +24,8 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Favorite Words'),
         ),
-        body: const Center(
-          child: Text('Hello World'),
+        body: Center(
+          child: Text(wordPair.asPascalCase),
         ),
       ),
     );
