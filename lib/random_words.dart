@@ -25,7 +25,7 @@ class RandomWordsState extends State<RandomWords> {
   }
 
   Widget _buildRow(WordPair pair) {
-    final alreadySaved = _randomWordPairs.contains(pair);
+    final alreadySaved = _savedWordPairs.contains(pair);
     return ListTile(
       title: Text(
         pair.asPascalCase,
@@ -38,9 +38,9 @@ class RandomWordsState extends State<RandomWords> {
       onTap: () {
         setState(() {
           if (alreadySaved) {
-            _randomWordPairs.remove(pair);
+            _savedWordPairs.remove(pair);
           } else {
-            _randomWordPairs.add(pair);
+            _savedWordPairs.add(pair);
           }
         });
       },
