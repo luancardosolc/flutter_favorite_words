@@ -8,6 +8,8 @@ class RandomWords extends StatefulWidget {
 
 class RandomWordsState extends State<RandomWords> {
   final _randomWordPairs = <WordPair>[];
+  final _savedWordPairs = Set<WordPair>();
+
   Widget _buildList() {
     return ListView.builder(
       padding: const EdgeInsets.all(16),
@@ -45,10 +47,46 @@ class RandomWordsState extends State<RandomWords> {
     );
   }
 
+  void _pushSaved() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) {
+          final Iterable<ListTile> tiles = _savedWordPairs.map(
+            (WordPair pair) {
+              return ListTile(
+                title: Text(
+                  pair.asPascalCase,
+                  style: const TextStyle(fontSize: 18),
+                ),
+              );
+            },
+          );
+          final List<Widget> divided = ListTile.divideTiles(
+            context: context,
+            tiles: tiles,
+          ).toList();
+
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Saved Suggestions'),
+            ),
+            body: ListView(children: divided),
+          );
+        },
+      ),
+    );
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Favorite Words'),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.list),
+            onPressed: _pushSaved,
+          ),
+        ],
       ),
       body: _buildList(),
     );
