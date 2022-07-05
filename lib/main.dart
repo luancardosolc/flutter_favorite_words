@@ -20,14 +20,46 @@ class MyApp extends StatelessWidget {
           secondary: const Color(0xFFFFC107),
         ),
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Favorite Words'),
+      home: RandomWords(),
+    );
+  }
+}
+
+class RandomWords extends StatefulWidget {
+  @override
+  RandomWordsState createState() => RandomWordsState();
+}
+
+class RandomWordsState extends State<RandomWords> {
+  Widget _buildList() {
+    return ListView(
+      padding: const EdgeInsets.all(8),
+      children: <Widget>[
+        Container(
+          height: 50,
+          color: Colors.amber[600],
+          child: const Center(child: Text('Entry A')),
         ),
-        body: Center(
-          child: Text(wordPair.asPascalCase),
+        Container(
+          height: 50,
+          color: Colors.amber[500],
+          child: const Center(child: Text('Entry B')),
         ),
+        Container(
+          height: 50,
+          color: Colors.amber[100],
+          child: const Center(child: Text('Entry C')),
+        ),
+      ],
+    );
+  }
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Favorite Words'),
       ),
+      body: _buildList(),
     );
   }
 }
